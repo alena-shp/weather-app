@@ -7,6 +7,7 @@ const KEY_API = '11cadd34713cb737ab290c23d11d8764'
 
 class App extends React.Component {
   state = {
+    city: undefined,
     temp: undefined,
     error: undefined
   }
@@ -21,11 +22,13 @@ class App extends React.Component {
       const data = await response.json()
       console.log(data)
       this.setState({
-        temp: data.main.temp,
+        city: data.name,
+        temp: Math.round(data.main.temp),
         error: ''
       })
     } else {
       this.setState({
+        city: undefined,
         temp: undefined,
         error: 'Enter the name of the city'
       })
@@ -37,8 +40,10 @@ class App extends React.Component {
         <h1>knowFORECAST</h1>
         <h5>find out the weather in your city</h5>
         <Form getWeather={this.getWeather} />
-        <Weather temperature={this.state.temp} 
-        error={this.state.error}
+        <Weather
+          city={this.state.city}
+          temperature={this.state.temp}
+          error={this.state.error}
         />
       </div>
     )
