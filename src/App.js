@@ -8,7 +8,14 @@ const KEY_API = '11cadd34713cb737ab290c23d11d8764'
 class App extends React.Component {
   state = {
     city: undefined,
-    temp: undefined,
+    temperature: undefined,
+    description: undefined,
+    sunrise: undefined,
+    sunset: undefined,
+    humidity: undefined,
+    pressure: undefined,
+    deg: undefined,
+    speed: undefined,
     error: undefined
   }
 
@@ -23,13 +30,22 @@ class App extends React.Component {
       console.log(data)
       this.setState({
         city: data.name,
-        temp: Math.round(data.main.temp),
+        temperature: Math.round(data.main.temp),
+        description: data.weather[0].description,
+        sunrise: data.sys.sunrise,
+        sunset: data.sys.sunset,
+        humidity: data.main.humidity,
+        pressure: data.main.pressure,
+        deg: data.wind.deg,
+        speed: data.wind.speed,
         error: ''
       })
     } else {
       this.setState({
         city: undefined,
-        temp: undefined,
+        temperature: undefined,
+        description: undefined,
+        icon: undefined,
         error: 'Enter the name of the city'
       })
     }
@@ -42,7 +58,14 @@ class App extends React.Component {
         <Form getWeather={this.getWeather} />
         <Weather
           city={this.state.city}
-          temperature={this.state.temp}
+          temperature={this.state.temperature}
+          description={this.state.description}
+          sunrise={this.state.sunrise}
+          sunset={this.state.sunset}
+          humidity={this.state.humidity}
+          pressure={this.state.pressure}
+          deg={this.state.deg}
+          speed={this.state.speed}
           error={this.state.error}
         />
       </div>
