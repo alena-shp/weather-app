@@ -2,8 +2,8 @@ import React from 'react'
 
 const Form = props => {
   return (
-    <form>
-      <input type="text" placeholder="Enter city" name="city" />
+    <form onSubmit={props.getWeather}>
+      <input type="text" placeholder="Enter city" />
       <button>Search</button>
     </form>
   )
