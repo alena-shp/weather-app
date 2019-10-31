@@ -6,7 +6,7 @@ const Form = props => {
   return (
     <form onSubmit={props.getWeather}>
       <Input type="text" placeholder="Enter city" name="city" />
-      <Button type="submit">Search</Button>
+      <Button type="submit" variant="contained" color="primary">Search</Button>
     </form>
   )
 }

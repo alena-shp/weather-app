@@ -16,12 +16,13 @@ class App extends React.Component {
     pressure: undefined,
     deg: undefined,
     speed: undefined,
+    icon: undefined,
     error: undefined
   }
 
   getWeather = async e => {
     e.preventDefault()
-    let city = e.target.elements.city.value
+    const city = e.target.elements.city.value
     if (city === '') {
       this.setState({
         city: undefined,
@@ -33,6 +34,7 @@ class App extends React.Component {
         pressure: undefined,
         deg: undefined,
         speed: undefined,
+        icon: undefined,
         error: 'Enter the name of the city'
       })
     } else {
@@ -52,6 +54,7 @@ class App extends React.Component {
           pressure: data.main.pressure,
           deg: data.wind.deg,
           speed: data.wind.speed,
+          icon: data.weather[0].icon,
           error: ''
         })
       } else if (city !== data.name) {
@@ -65,6 +68,7 @@ class App extends React.Component {
           pressure: undefined,
           deg: undefined,
           speed: undefined,
+          icon: undefined,
           error: 'City not found'
         })
       }
@@ -86,6 +90,7 @@ class App extends React.Component {
           pressure={this.state.pressure}
           deg={this.state.deg}
           speed={this.state.speed}
+          icon={this.state.icon}
           error={this.state.error}
         />
       </div>
