@@ -22,32 +22,52 @@ class App extends React.Component {
   getWeather = async e => {
     e.preventDefault()
     let city = e.target.elements.city.value
-    if (city) {
-      const response = await fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${KEY_API}&units=metric`
-      )
-      const data = await response.json()
-      console.log(data)
-      this.setState({
-        city: data.name,
-        temperature: Math.round(data.main.temp),
-        description: data.weather[0].description,
-        sunrise: data.sys.sunrise,
-        sunset: data.sys.sunset,
-        humidity: data.main.humidity,
-        pressure: data.main.pressure,
-        deg: data.wind.deg,
-        speed: data.wind.speed,
-        error: ''
-      })
-    } else {
+    if (city === '') {
       this.setState({
         city: undefined,
         temperature: undefined,
         description: undefined,
-        icon: undefined,
+        sunrise: undefined,
+        sunset: undefined,
+        humidity: undefined,
+        pressure: undefined,
+        deg: undefined,
+        speed: undefined,
         error: 'Enter the name of the city'
       })
+    } else {
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${KEY_API}&units=metric`
+      )
+      const data = await response.json()
+
+      if (city === data.name) {
+        this.setState({
+          city: data.name,
+          temperature: Math.round(data.main.temp),
+          description: data.weather[0].description,
+          sunrise: data.sys.sunrise,
+          sunset: data.sys.sunset,
+          humidity: data.main.humidity,
+          pressure: data.main.pressure,
+          deg: data.wind.deg,
+          speed: data.wind.speed,
+          error: ''
+        })
+      } else if (city !== data.name) {
+        this.setState({
+          city: undefined,
+          temperature: undefined,
+          description: undefined,
+          sunrise: undefined,
+          sunset: undefined,
+          humidity: undefined,
+          pressure: undefined,
+          deg: undefined,
+          speed: undefined,
+          error: 'City not found'
+        })
+      }
     }
   }
   render() {
@@ -55,7 +75,7 @@ class App extends React.Component {
       <div>
         <h1>knowFORECAST</h1>
         <h5>find out the weather in your city</h5>
-        <Form getWeather={this.getWeather} />
+        <Form getWeather={this.getWeather} getClik={this.getClik} />
         <Weather
           city={this.state.city}
           temperature={this.state.temperature}

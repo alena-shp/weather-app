@@ -1,10 +1,12 @@
 import React from 'react'
+import Button from '@material-ui/core/Button'
+import Input from '@material-ui/core/Input'
 
 const Form = props => {
   return (
     <form onSubmit={props.getWeather}>
-      <input type="text" placeholder="Enter city" name="city"/>
-      <button>Search</button>
+      <Input type="text" placeholder="Enter city" name="city" />
+      <Button type="submit">Search</Button>
     </form>
   )
 }
