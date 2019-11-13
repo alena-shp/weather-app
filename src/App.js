@@ -76,10 +76,14 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h1>knowFORECAST</h1>
-        <h5>find out the weather in your city</h5>
-        <Form getWeather={this.getWeather} getClik={this.getClik} />
+      <div className="App">
+        <div className="App__header">
+          <div className="App__header-title">
+            <h1>knowFORECAST</h1>
+            <h5>find out the weather in your city</h5>
+          </div>
+          <Form getWeather={this.getWeather} getClik={this.getClik} />
+        </div>
         <Weather
           city={this.state.city}
           temperature={this.state.temperature}
