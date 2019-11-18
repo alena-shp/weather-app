@@ -1,0 +1,43 @@
+html {
+  background-image: url('./icon/image.png');
+  background-size: cover;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+
+  &__header {
+    background: white;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding: 20px;
+  }
+
+  &__header-logo {
+    align-items: flex-end;
+    display: flex;
+    flex-direction: column;
+
+    h1 {
+      color: rgb(66, 170, 255);;
+      margin: 0 0 4px 0;
+    }
+
+    h5 {
+      color: rgb(17, 64, 102);
+      margin: 0;
+    }
+  }
+  &__information {
+    align-items: center;
+    display: flex;
+    flex: 1;
+    justify-content: center;
+  }
+}

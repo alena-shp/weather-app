@@ -1,5 +1,5 @@
 import React from 'react'
-import './App.css'
+import './App.scss'
 import Form from './Form'
 import Weather from './Weather'
 
@@ -43,13 +43,18 @@ class App extends React.Component {
       )
       const data = await response.json()
 
+      let sunrise = data.sys.sunrise
+      let sunrise_date = new Date()
+      sunrise_date.setTime(sunrise)
+      let sunrise_time =
+        sunrise_date.getHours() + ':' + sunrise_date.getMinutes()
+
       if (city === data.name) {
         this.setState({
           city: data.name,
           temperature: Math.round(data.main.temp),
           description: data.weather[0].description,
-          sunrise: data.sys.sunrise,
-          sunset: data.sys.sunset,
+          sunrise: sunrise_time,
           humidity: data.main.humidity,
           pressure: data.main.pressure,
           deg: data.wind.deg,
@@ -63,7 +68,6 @@ class App extends React.Component {
           temperature: undefined,
           description: undefined,
           sunrise: undefined,
-          sunset: undefined,
           humidity: undefined,
           pressure: undefined,
           deg: undefined,
@@ -78,25 +82,26 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="App__header">
-          <div className="App__header-title">
+          <div className="App__header-logo">
             <h1>knowFORECAST</h1>
             <h5>find out the weather in your city</h5>
           </div>
           <Form getWeather={this.getWeather} getClik={this.getClik} />
         </div>
-        <Weather
-          city={this.state.city}
-          temperature={this.state.temperature}
-          description={this.state.description}
-          sunrise={this.state.sunrise}
-          sunset={this.state.sunset}
-          humidity={this.state.humidity}
-          pressure={this.state.pressure}
-          deg={this.state.deg}
-          speed={this.state.speed}
-          icon={this.state.icon}
-          error={this.state.error}
-        />
+        <div className="App__information">
+          <Weather
+            city={this.state.city}
+            temperature={this.state.temperature}
+            description={this.state.description}
+            sunrise={this.state.sunrise}
+            humidity={this.state.humidity}
+            pressure={this.state.pressure}
+            deg={this.state.deg}
+            speed={this.state.speed}
+            icon={this.state.icon}
+            error={this.state.error}
+          />
+        </div>
       </div>
     )
   }
